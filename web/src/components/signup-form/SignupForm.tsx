@@ -25,14 +25,25 @@ const SignupForm = () => {
     const {register, handleSubmit, formState: { isValid }} = useForm({ mode: 'onChange'});
     const nav = useNavigate();
 
+    const submit = (data: any) => {
+      axios.post('http://localhost:9991/users/signup', data)
+        .then((resp)=>{
+          console.log(resp);
+          localStorage.setItem("userId", resp.data.pk);
+          nav('/', {replace: true});
+        })
+        .catch((errors)=>{
+          console.log(errors);
+        });
+    }
+
     return (
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit(submit)}>
         <img className="form-logo" src={logo} alt="logo.png"/>
         <input className="form-input" type="text" placeholder="이메일" {...register("email", emailOpts)}/>
         <input className="form-input" type="text" placeholder="사용자이름" {...register("username", usernameOpts)}/>
         <input className="form-input" type="password" placeholder="비밀번호" {...register("password", passwordOpts)}/>
         <button className="form-btn form-btn-blue" type="submit" disabled={!isValid}>가입</button>
-        { errorMsg !== "" && <div className="form-error">{errorMsg}</div> }
       </form>
     );
 }
