@@ -1,7 +1,10 @@
+// Components
+import SignupForm from "../components/signup-form/SignupForm";
+
 const Signup = () => {
     return (
       <div className="center">
-        <div>Signup</div>
+        <SignupForm />
       </div>
     );
   }
