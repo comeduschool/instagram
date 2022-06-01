@@ -34,6 +34,12 @@ const SignupForm = () => {
         })
         .catch((errors)=>{
           console.log(errors);
+          let errorArray:string[] = [];
+          Object.keys(errors.response.data).map((key)=>{
+            errorArray = [...errorArray.concat(errors.response.data[key])];
+            return null;
+          });
+          setErrorMsg(errorArray.join(" "));
         });
     }
 
@@ -44,6 +50,7 @@ const SignupForm = () => {
         <input className="form-input" type="text" placeholder="사용자이름" {...register("username", usernameOpts)}/>
         <input className="form-input" type="password" placeholder="비밀번호" {...register("password", passwordOpts)}/>
         <button className="form-btn form-btn-blue" type="submit" disabled={!isValid}>가입</button>
+        { errorMsg !== "" && <div className="form-error">{errorMsg}</div> }
       </form>
     );
 }
