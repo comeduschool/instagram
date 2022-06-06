@@ -1,7 +1,12 @@
+# python modules
+import time
+import hashlib
+
 # Django modules
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -48,4 +53,42 @@ class User(AbstractUser):
     def __repr__(self):
         return f"<User {self.pk} {self.email} {self.username}>"
 
-    
+    def _create_authcode(self):
+        timestamp = int(time.time())
+        while True:
+            authcode = hashlib.sha224(f"{repr(self)}:{timestamp}".encode()).hexdigest()[:6]
+            try: 
+                User.objects.get(authcode__startswith=f"{authcode}:")
+            except User.DoesNotExist:
+                self.authcode = f"{authcode}:{timestamp}"
+                break
+        self.save()
+        return authcode
+
+    def create_authcode(self):
+        if self.authcode != "":
+            splited = self.authcode.split(":")
+            if time.time() - int(splited[1]) < self.TIMEOUT:
+                raise ValidationError("5분 이후에 인증코드를 생성할 수 있습니다.")
+
+        authcode = self._create_authcode()
+        return authcode
+
+    def check_authcode(self, authcode):
+        if self.authcode == "":
+            raise ValueError("먼저 인증코드를 생성하세요.")
+        
+        splited = self.authcode.split(":")
+
+        if time.time() - int(splited[1]) > self.TIMEOUT: 
+            raise ValidationError("인증코드가 만료됐습니다. 인증코드를 새로 생성하세요.")
+        else: 
+            if splited[0] == authcode:
+                return True
+            else:
+                return False
+
+    def change_lostpassword(self, password):
+        self.authcode = ""
+        self.set_password(password)
+        self.save()
