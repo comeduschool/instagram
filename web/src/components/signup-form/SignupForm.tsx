@@ -44,7 +44,7 @@ const SignupForm = () => {
     }
 
     return (
-      <form className="form" onSubmit={handleSubmit(submit)}>
+      <form className="signup-form" onSubmit={handleSubmit(submit)}>
         <img className="form-logo" src={logo} alt="logo.png"/>
         <input className="form-input" type="text" placeholder="이메일" {...register("email", emailOpts)}/>
         <input className="form-input" type="text" placeholder="사용자이름" {...register("username", usernameOpts)}/>
