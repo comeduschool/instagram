@@ -40,3 +40,12 @@ class User(AbstractUser):
 
     class Meta:
         ordering = ['created']
+
+    def __str__(self):
+        """admin page에서 사용"""
+        return f"({self.pk}) {self.email}"
+
+    def __repr__(self):
+        return f"<User {self.pk} {self.email} {self.username}>"
+
+    
