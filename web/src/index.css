@@ -79,9 +79,9 @@ img.form-logo {
 }
 
 .form-btn {
-  width: 268px;
+  width: 292px;
   height: 30px;
-  margin: 13px auto;
+  margin: 13px 0;
   border: solid 1px;
   border-radius: 3px;
   font-size: 14px;
@@ -161,4 +161,14 @@ img.form-logo {
   text-align: center;
   background-color: #fff;
   border: 1px solid #DBDBDB;
+}
+
+.form-error {
+  width: 270px;
+  height: 40px;
+  margin: 13px auto;
+  padding: 0 10px;
+  display: block;
+  color: red;
+  font-size: 14px;
 }
