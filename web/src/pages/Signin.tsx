@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { Link } from 'react-router-dom';
 
 // Components
 import SigninForm from "../components/signin-form/SigninForm";
@@ -20,7 +21,7 @@ const Signin = () => {
     <div className="center">
       <SigninForm />
       <div className="center-item">
-        계정이 없으신가요? <a className="signup-link noline-link" href="/signup">가입하기</a>
+        계정이 없으신가요? <Link className="signup-link noline-link" to="/signup">가입하기</Link>
       </div>
     </div>
   );
