@@ -51,6 +51,18 @@ code {
   border: 1px solid #DBDBDB;
 }
 
+.password-form {
+  width: 350px;
+  height: 520px;
+  display: flex;
+  margin: 25px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  background-color: #fff;
+  border: 1px solid #DBDBDB;
+}
+
 img.form-logo {
   align-self: center;
   width: 175px;
@@ -148,6 +160,7 @@ img.form-logo {
 }
 
 .signup-link { 
+  cursor: default;
   color : #00366B;
   align-self: center;
 }
@@ -171,4 +184,48 @@ img.form-logo {
   display: block;
   color: red;
   font-size: 14px;
+}
+
+
+.password-form {
+  width: 350px;
+  height: 520px;
+  display: flex;
+  margin: 25px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  background-color: #fff;
+  border: 1px solid #DBDBDB;
+}
+
+.form-content-icon {
+  width: 108px;
+  height: 108px;
+  margin: 18px auto 6px auto;
+}
+
+.form-content-title {
+  width: 270px;
+  height: 40px;
+  margin: 6px auto 6px auto;
+  padding: 0 10px;
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-content-subtitle {
+  width: 270px;
+  height: 40px;
+  margin: 6px auto;
+  padding: 0 10px;
+  display: block;
+  font-size: 14px;
+  color: #8e8e8e;    
+}
+
+.form-expired {
+  margin-left: 275px;
 }
