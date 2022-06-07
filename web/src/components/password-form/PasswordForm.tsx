@@ -114,7 +114,7 @@ const PasswordForm = () => {
 
   return (
     <form className="password-form">
-      <img className="form-content-icon" src={LockIcon} alt=""/>
+      <img className="form-content-icon" src={LockIcon} alt="lock.svg"/>
       <div className="form-content-title">
         로그인에 문제가 있나요?
       </div>

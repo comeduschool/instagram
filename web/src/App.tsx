@@ -11,9 +11,13 @@ import Profile from './pages/Profile';
 import Home from './pages/Home';
 import Lab from './pages/Lab';
 
+// Components
+import Header from './components/header/Header';
+
 function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home/>}></Route>
         <Route path="/signup" element={<Signup/>}></Route>
