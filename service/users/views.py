@@ -21,7 +21,11 @@ class AuthViewSet(ModelViewSet):
 
     def signup(self, request):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        if not serializer.is_valid(raise_exception=True):
+            return Response(
+                serializer.data,
+                status=status.HTTP_400_BAD_REQUEST
+            )
         user = serializer.save()
         login(request, user)
         return Response(

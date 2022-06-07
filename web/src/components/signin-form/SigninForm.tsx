@@ -21,7 +21,7 @@ const SigninForm = () =>{
   const nav = useNavigate();
 
   const submit = (data: any) => {
-    axios.post('http://localhost:9991/users/signin', data)
+    axios.post('/users/signin', data)
       .then((resp)=>{
         localStorage.setItem("userId", resp.data.pk);
         nav('/', {replace: true});

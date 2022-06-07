@@ -26,7 +26,7 @@ const SignupForm = () => {
     const nav = useNavigate();
 
     const submit = (data: any) => {
-      axios.post('http://localhost:9991/users/signup', data)
+      axios.post('/users/signup', data)
         .then((resp)=>{
           console.log(resp);
           localStorage.setItem("userId", resp.data.pk);
