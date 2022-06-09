@@ -6,7 +6,7 @@ import NotFound from './pages/NotFound';
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Password from './pages/Password';
-import User from './pages/User';
+import Setting from './pages/Setting';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 import Lab from './pages/Lab';
@@ -24,8 +24,8 @@ function App() {
         <Route path="/signin" element={<Signin/>}></Route>
         <Route path="/password" element={<Password/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
-        <Route path="/user" element={<User/>}></Route>
-        <Route path="/profile" element={<Profile/>}></Route>
+        <Route path="/setting" element={<Setting/>}></Route>
+        <Route path="/:username" element={<Profile/>}></Route>
         <Route path="/lab" element={<Lab/>}></Route>
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>

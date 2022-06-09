@@ -53,13 +53,11 @@ nav {
     height: 28px;
 }
 
-.nav-item img {
+.nav-item-profile {
     display: block;
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .logo {
@@ -71,27 +69,42 @@ height: 30px;
 
 .nav-menu-contaner {
     position: absolute;
-    display: none;
-    opacity: 0;
-    z-index: 1;
-    box-shadow: 0 14px 35px 0 rgba(9,9,12,0.4);
-}
-
-.nav-menu-contaner-show {
-    position: absolute;
-    display: block;
-    opacity: 0;
-    padding: 5px;
-    background-color: white;
     top: 15px;
     left: -175px;
-    width: 225px;
     border-radius: 5px;
     box-shadow: 0 14px 35px 0 rgba(9,9,12,0.4);
-    z-index: 1;
-    opacity: 1;
     padding: 0;
+    background-color: white;
+    
 }
+.nav-menu-contaner-show {
+    display: block;
+    width: 225px;
+    z-index: 1000;
+}
+.nav-menu-contaner-hide {
+    display: none;
+    width: 225px;
+    z-index: 1000;
+}
+
+.nav-menu-background-show {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    opacity: 1;
+    z-index: 900;
+    width: 100vw;
+    height: 100vh;
+}
+
+.nav-menu-background-hide {
+    display: none;
+    opacity: 1;
+    width: 0;
+    height: 0;
+}
+
 
 .nav-menu-contaner-tail {
     position: absolute;
@@ -108,8 +121,8 @@ height: 30px;
     transition: all 200ms linear;
     box-shadow: 0 14px 35px 0 rgba(9,9,12,0.4);
 }
-nav-menu-item-list {
-    margin: 30px;
+
+.nav-menu-item-list {
     padding: 0px;
 }
 .nav-menu-item {
@@ -123,22 +136,21 @@ nav-menu-item-list {
     height: 24px;
 }
 
-.icon-label-container > img {
-    margin: 0px;
-}
-
-.nav-menu-logout {
-    border-top: 1px solid #DBDBDB;
-    padding-bottom: 0px;
-    margin-top: 5px;
-}
-
 .icon-label-container { 
     display: flex;
     align-items: center;
     padding: 14px;
     text-decoration: none;
     color: black
+}
+
+.icon-label-container > img {
+    margin: 0px;
+}
+
+.nav-menu-logout {
+    border-top: 1px solid #DBDBDB;
+    margin-top: 5px;
 }
 
 .icon-label {
