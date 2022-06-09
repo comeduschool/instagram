@@ -1,10 +1,10 @@
 export interface User{
-  pk: number;
-  email: string;
-  username: string;
-  profile: string|null;
-  description: string;
-  updated: string;
+  pk?: number;
+  email?: string;
+  username?: string;
+  profile?: string|null;
+  description?: string;
+  updated?: string;
 }
 
 export interface UserState {

@@ -1,9 +1,13 @@
 // react modules
 import { useState, useEffect } from 'react';
 import { useForm, RegisterOptions } from 'react-hook-form';
+import { useDispatch, useSelector } from "react-redux";
 
-// External modules
-import axios from 'axios'
+// Services
+import { UserService } from '../../services/UserService';
+
+// Models
+import { UserState } from '../../models/user';
 
 // Styles
 import './SettingForm.css';
@@ -14,26 +18,14 @@ const SettingForm = () => {
   };
 
   const [modal, setModal] = useState(" modal-hide");
-  const [user, setUser] = useState({
-    pk: 0,
-    username: '',
-    email: '',
-    description: '',
-    profile: null
-  });
   const { register, getValues, formState: { errors } } = useForm({ mode: 'onChange' });
+
+  const { user } = useSelector((state: { user: UserState })=> state.user);
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     const userId = localStorage.getItem("userId");
-    console.log(userId);
-    axios.get(`/users/${userId}`)
-      .then((resp)=>{
-        console.log(resp);
-        setUser(resp.data);
-      })
-      .catch((error)=>{
-        console.log(error);
-      });
+    dispatch<any>(UserService.retrieve(userId));
   }, []);
 
   const showModal = () => {
@@ -48,7 +40,7 @@ const SettingForm = () => {
 
   const updateProfile = () => {
     const [username, description] = getValues(["username", "description"])
-    let userData = {};
+    let userData: any = {pk: user.pk};
     if (username !== "") {
       userData = {...userData, username};
     }
@@ -56,13 +48,7 @@ const SettingForm = () => {
       userData = {...userData, description};
     }
     
-    axios.patch(`/users/${user.pk}`, userData)
-      .then((resp)=>{
-        setUser(resp.data);
-      })
-      .catch((error)=>{
-        console.log(error);
-      });
+    dispatch<any>(UserService.update(userData));
   }
 
   return (
