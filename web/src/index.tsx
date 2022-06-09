@@ -6,6 +6,12 @@ import reportWebVitals from './reportWebVitals';
 // External modules
 import axios from 'axios';
 
+// Redux
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import UserReducer from './reducers/UserReducer';
+import thunkMiddleware from 'redux-thunk'
+
 // Components
 import App from './App';
 
@@ -18,12 +24,22 @@ const root = ReactDOM.createRoot(
 
 axios.defaults.baseURL = 'http://localhost:9991';
 axios.defaults.withCredentials = true
-// axios.defaults.xsrfCookieName = 'csrftoken';
-// axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+const store = configureStore({
+  reducer: {
+    user: UserReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware),
+  devTools: true
+});
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
