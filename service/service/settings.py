@@ -157,5 +157,6 @@ CORS_ORIGIN_WHITELIST = [
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS  = [
-    "http://localhost:9991",
+    # frontend url
+    "http://localhost:9992",
 ]

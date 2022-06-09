@@ -1,20 +1,27 @@
 // react modules
 import { useState, useEffect } from 'react';
+import { useForm, RegisterOptions } from 'react-hook-form';
 
 // External modules
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 
 // Styles
 import './SettingForm.css';
 
 const SettingForm = () => {
+  const passwordOpts: RegisterOptions = {
+    minLength: 6
+  };
+
   const [modal, setModal] = useState(" modal-hide");
   const [user, setUser] = useState({
+    pk: 0,
     username: '',
     email: '',
     description: '',
     profile: null
   });
+  const { register, getValues, formState: { errors } } = useForm({ mode: 'onChange' });
 
   useEffect(()=>{
     const userId = localStorage.getItem("userId");
@@ -24,7 +31,9 @@ const SettingForm = () => {
         console.log(resp);
         setUser(resp.data);
       })
-      .catch((error)=>{});
+      .catch((error)=>{
+        console.log(error);
+      });
   }, []);
 
   const showModal = () => {
@@ -35,6 +44,25 @@ const SettingForm = () => {
     if (event.target.id === "modal") {
       setModal(" modal-hide");
     }
+  }
+
+  const updateProfile = () => {
+    const [username, description] = getValues(["username", "description"])
+    let userData = {};
+    if (username !== "") {
+      userData = {...userData, username};
+    }
+    if (description !== "") {
+      userData = {...userData, description};
+    }
+    
+    axios.patch(`/users/${user.pk}`, userData)
+      .then((resp)=>{
+        setUser(resp.data);
+      })
+      .catch((error)=>{
+        console.log(error);
+      });
   }
 
   return (
@@ -54,7 +82,7 @@ const SettingForm = () => {
             이메일
           </div>
           <div className="profile-input-data">
-            <input className="profile-input" placeholder="이메일" value={user.email} disabled></input>
+            <input className="profile-input" placeholder="이메일" defaultValue={user.email} disabled></input>
           </div>
         </div>
         <div className="profile-input-container">
@@ -62,7 +90,7 @@ const SettingForm = () => {
             사용자 이름
           </div>
           <div className="profile-input-data">
-            <input className="profile-input" placeholder="사용자 이름" value={user.username}></input>
+            <input className="profile-input" type="text" placeholder="사용자 이름" defaultValue={user?.username ? user.username : ''} {...register("username")}></input>
           </div>
         </div>
         <div className="profile-input-container">
@@ -70,12 +98,12 @@ const SettingForm = () => {
             소개
           </div>
           <div className="profile-input-data">
-            <textarea className="profile-input profile-textarea" rows={4} cols={50} value={user.description}></textarea>
+            <textarea className="profile-input profile-textarea" rows={4} cols={50} defaultValue={user?.description} {...register("description")}></textarea>
           </div>
         </div>
         <div className="profile-input-container">
           <div className="profile-input-label"></div>
-          <div className="profile-input-button">제출</div>
+          <button className="profile-input-button" onClick={updateProfile}>제출</button>
         </div>
         <div className="profile-input-container">
           <div className="profile-input-label">
