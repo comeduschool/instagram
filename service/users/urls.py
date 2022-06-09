@@ -4,6 +4,7 @@ from django.urls import path
 # viewsets
 from .views import (
     AuthViewSet,
+    UserViewSet,
 )
 
 signup = AuthViewSet.as_view({'post': 'signup'})
@@ -16,6 +17,12 @@ authcode = AuthViewSet.as_view({
 
 password = AuthViewSet.as_view({'put': 'change_lostpassword'})
 
+user_detail = UserViewSet.as_view({
+    'get': 'retrieve',
+    'patch': 'partial_update'
+})
+
+
 urlpatterns = [
     # path("pk"),
     # path(),
@@ -23,4 +30,5 @@ urlpatterns = [
     path('/signin', signin),
     path('/authcode', authcode),
     path('/password', password),
+    path('/<int:pk>', user_detail),
 ]

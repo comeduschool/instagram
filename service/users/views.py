@@ -169,3 +169,9 @@ class AuthViewSet(ModelViewSet):
         return Response (
                 status=status.HTTP_200_OK
             )
+
+class UserViewSet(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [ IsAuthenticated, ]
+    
