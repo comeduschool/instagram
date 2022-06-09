@@ -1,6 +1,7 @@
 // React modules
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Assets
 import HomeIcon from '../../icons/home-outlined.svg';
@@ -13,6 +14,8 @@ import './Header.css';
 
 const Header = () => {
   const [menu, setMenu] = useState(false);
+  const [cookies] = useCookies();
+  const nav = useNavigate();
 
   const showMenu = () => {
     console.log("showMenu");
@@ -23,6 +26,17 @@ const Header = () => {
     if (event?.target.id === "menu-background") {
       setMenu(false);
     }
+  }
+
+  const handleAuth = () => {
+    if (!cookies.csrftoken) {
+      nav('/signin', {replace: true});
+    } else {
+      document.cookie = 'csrftoken=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      localStorage.clear();
+      window.location.replace('/');
+    } 
+    setMenu(false);
   }
 
   return (
@@ -54,16 +68,16 @@ const Header = () => {
               <div className={menu ? "nav-menu-contaner nav-menu-contaner-show" : "nav_menu-contaner nav-menu-contaner-hide"}>
                 <div className="nav-menu-contaner-tail"></div>
                 <div className="nav-menu-item-list">
-                  <Link className="icon-label-container" to="/:">
+                  <a className="icon-label-container" href="/:">
                     <img src={ProfileIcon} alt="profile.svg" />
                     <span className="icon-label">프로필</span>
-                  </Link>
-                  <Link className="icon-label-container" to="/setting">
+                  </a>
+                  <a className="icon-label-container" href="/setting">
                     <img src={SettingIcon} alt="setting.svg" />
                     <span className="icon-label">설정</span>
-                  </Link>
-                  <div className="icon-label-container nav-menu-logout">
-                    <span className="icon-label">로그아웃</span>
+                  </a>
+                  <div className="icon-label-container nav-menu-logout" onClick={handleAuth}>
+                    <span className="icon-label">{cookies.csrftoken ? "로그아웃": "로그인" }</span>
                   </div>
                 </div>
               </div>

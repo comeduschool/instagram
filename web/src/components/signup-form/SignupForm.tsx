@@ -1,6 +1,5 @@
 // React modules
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useForm, RegisterOptions } from 'react-hook-form';
 import axios from 'axios';
 
@@ -23,14 +22,13 @@ const SignupForm = () => {
     // States
     const [errorMsg, setErrorMsg] = useState("");
     const {register, handleSubmit, formState: { isValid }} = useForm({ mode: 'onChange'});
-    const nav = useNavigate();
 
     const submit = (data: any) => {
       axios.post('/users/signup', data)
         .then((resp)=>{
           console.log(resp);
           localStorage.setItem("userId", resp.data.pk);
-          nav('/', {replace: true});
+          window.location.replace('/');
         })
         .catch((errors)=>{
           console.log(errors);
