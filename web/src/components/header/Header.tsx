@@ -3,12 +3,6 @@ import { useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 
-// Assets
-import HomeIcon from '../../icons/home-outlined.svg';
-import AddIcon from '../../icons/add-outlined.svg';
-import ProfileIcon from '../../icons/profile.svg';
-import SettingIcon from '../../icons/setting.svg';
-
 // Styles
 import './Header.css';
 
@@ -51,11 +45,11 @@ const Header = () => {
         <div className="nav-right">
           <span className="nav-item">
             <Link to="/">
-              <img src={HomeIcon} alt="home.svg" />
+              <img src="assets/icons/home-outlined.svg" alt="home.svg" />
             </Link>
           </span>
           <span className="nav-item">
-            <img src={AddIcon} alt="add.svg" />
+            <img src="assets/icons/add-outlined.svg" alt="add.svg" />
           </span>
           <span className="nav-item">
             <img 
@@ -69,11 +63,11 @@ const Header = () => {
                 <div className="nav-menu-container-tail"></div>
                 <div className="nav-menu-item-list">
                   <a className="icon-label-container" href="/:">
-                    <img src={ProfileIcon} alt="profile.svg" />
+                    <img src="assets/icons/profile.svg" alt="profile.svg" />
                     <span className="icon-label">프로필</span>
                   </a>
                   <a className="icon-label-container" href="/setting">
-                    <img src={SettingIcon} alt="setting.svg" />
+                    <img src="assets/icons/setting.svg" alt="setting.svg" />
                     <span className="icon-label">설정</span>
                   </a>
                   <div className="icon-label-container nav-menu-logout" onClick={handleAuth}>

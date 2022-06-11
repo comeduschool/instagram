@@ -4,9 +4,6 @@ import { useState, useEffect } from 'react';
 import { useForm, RegisterOptions } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
-// Assets
-import LockIcon from '../../icons/lock.svg';
-
 const PasswordForm = () => {
   const emailOpts: RegisterOptions = {
     required: true,
@@ -114,7 +111,7 @@ const PasswordForm = () => {
 
   return (
     <form className="password-form">
-      <img className="form-content-icon" src={LockIcon} alt="lock.svg"/>
+      <img className="form-content-icon" src="assets/icons/lock.svg" alt="lock.svg"/>
       <div className="form-content-title">
         로그인에 문제가 있나요?
       </div>

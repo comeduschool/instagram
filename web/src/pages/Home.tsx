@@ -1,7 +1,10 @@
+// Components
+import FeedList from "../components/feed-list/FeedList";
+
 const Home = () => {
     return (
-      <div className="center">
-        <div>Home</div>
+      <div>
+        <FeedList />
       </div>
     );
   }
