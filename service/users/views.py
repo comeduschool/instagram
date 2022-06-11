@@ -7,13 +7,16 @@ from django.contrib.auth import login
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser
 
 # models
 from users.models import User
 
 # serializers
 from users.serializers import UserSerializer
+
+# permissions
+from users.permissions import IsUserOwner
 
 class AuthViewSet(ModelViewSet):
     serializer_class = UserSerializer
@@ -174,13 +177,13 @@ class AuthViewSet(ModelViewSet):
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [ IsAuthenticated, ]
+    permission_classes = [ IsUserOwner, ]
 
     def change_password(self, request, pk):
         password = request.data.get('password', None)
         new_password = request.data.get('new_password', None)
         try:
-            user = User.objects.get(pk=pk)
+            user = self.get_object()
         except User.DoesNotExist:
             return Response(
                 {
@@ -213,7 +216,8 @@ class UserViewSet(ModelViewSet):
             )
 
         try:
-            user = request.user.upload_profile(profile_file)
+            user = self.get_object()
+            user = user.upload_profile(profile_file)
         except Exception as e:
             return Response(
                 {
@@ -228,7 +232,8 @@ class UserViewSet(ModelViewSet):
 
     def destroy_profile(self, request, pk):
         try:
-            user = request.user.delete_profile()
+            user = self.get_object()
+            user = user.delete_profile()
         except Exception as e:
             return Response(
                 {
