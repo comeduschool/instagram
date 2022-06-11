@@ -9,18 +9,17 @@ import axios from 'axios';
 // Redux
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import UserReducer from './reducers/UserReducer';
 import thunkMiddleware from 'redux-thunk'
+
+// Reducers
+import UserReducer from './reducers/UserReducer';
+import FeedReducer from './reducers/FeedReducer';
 
 // Components
 import App from './App';
 
 // Styles
 import './index.css';
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
 
 axios.defaults.baseURL = 'http://localhost:9991';
 axios.defaults.withCredentials = true
@@ -29,11 +28,16 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 const store = configureStore({
   reducer: {
-    user: UserReducer,
+    UserState: UserReducer,
+    FeedState: FeedReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunkMiddleware),
   devTools: true
 });
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 
 root.render(
   <React.StrictMode>

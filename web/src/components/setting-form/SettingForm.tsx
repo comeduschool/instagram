@@ -26,7 +26,7 @@ const SettingForm = () => {
   const { register, setValue, getValues, formState: { errors } } = useForm({ mode: 'onChange' });
   const fileInput: any = useRef(null);
 
-  const { user } = useSelector((state: { user: UserState })=> state.user);
+  const user = useSelector((state: { UserState: UserState })=> state.UserState.user);
   const dispatch = useDispatch();
 
   useEffect(()=>{
