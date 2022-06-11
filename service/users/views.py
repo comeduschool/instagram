@@ -1,4 +1,5 @@
 # django modules
+from re import S
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 
@@ -174,4 +175,68 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [ IsAuthenticated, ]
-    
+
+    def change_password(self, request, pk):
+        password = request.data.get('password', None)
+        new_password = request.data.get('new_password', None)
+        try:
+            user = User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return Response(
+                {
+                    "message": "올바른 사용자가 아닙니다."
+                }
+            )
+
+        try: 
+            user.change_password(password, new_password)
+            return Response(
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            return Response(
+                {
+                    'message': str(e)
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+    def upload_profile(self, request, pk):
+        profile_file = request.FILES.get("file", None)
+        if profile_file is None:
+            raise Response(
+                {
+                    "message": "파일이 없습니다. 파일을 업로드해주세요."
+                },
+                status=status.HTTP_400_BAD_REQUEST
+
+            )
+
+        try:
+            user = request.user.upload_profile(profile_file)
+        except Exception as e:
+            return Response(
+                {
+                    "message": str(e)
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        return Response(
+            self.get_serializer(user).data,
+            status=status.HTTP_200_OK
+        )
+
+    def destroy_profile(self, request, pk):
+        try:
+            user = request.user.delete_profile()
+        except Exception as e:
+            return Response(
+                {
+                    "message": str(e)
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        return Response(
+            self.get_serializer(user).data,
+            status=status.HTTP_200_OK
+        )

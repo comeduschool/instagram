@@ -1,4 +1,5 @@
 # python modules
+from multiprocessing.sharedctypes import RawValue
 import time
 import hashlib
 
@@ -33,9 +34,7 @@ class User(AbstractUser):
     email = models.EmailField(max_length=256, unique=True)
     username = models.CharField(max_length=128, unique=True)
     password = models.CharField(max_length=128)
-    profile = models.ImageField(default="", 
-                                null=False, 
-                                blank=True)
+    profile = models.ImageField(null=True)
     description = models.CharField(max_length=512, blank=True)
     authcode = models.CharField(max_length=17, blank=True, default="")
     created = models.DateTimeField(auto_now_add=True)
@@ -92,3 +91,24 @@ class User(AbstractUser):
         self.authcode = ""
         self.set_password(password)
         self.save()
+
+    def change_password(self, password, new_password):
+        if self.check_password(password):
+            self.set_password(new_password)
+            self.save()
+        else:
+            raise ValidationError("비밀번호 변경이 실패했습니다.")
+
+    def upload_profile(self, file):
+        if 'image' not in file.content_type:
+            raise ValidationError("이미지 파일이 아닙니다. 이미지 파일을 업로드해주세요")
+        ext = file.content_type.split("/")[-1]
+
+        # MEDIA_ROOT/profiles/{pk}/profile-{timestamp}.ext
+        self.profile.save(f"profiles/{self.pk}/profile-{int(time.time())}.{ext}", file.file)
+        return self
+
+    def delete_profile(self):
+        self.profile = None
+        self.save()
+        return self

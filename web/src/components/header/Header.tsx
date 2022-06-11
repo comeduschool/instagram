@@ -65,8 +65,8 @@ const Header = () => {
               onClick={showMenu}
             />
             <div className="nav-menu">
-              <div className={menu ? "nav-menu-contaner nav-menu-contaner-show" : "nav_menu-contaner nav-menu-contaner-hide"}>
-                <div className="nav-menu-contaner-tail"></div>
+              <div className={menu ? "nav-menu-container nav-menu-container-show" : "nav-menu-container nav-menu-container-hide"}>
+                <div className="nav-menu-container-tail"></div>
                 <div className="nav-menu-item-list">
                   <a className="icon-label-container" href="/:">
                     <img src={ProfileIcon} alt="profile.svg" />

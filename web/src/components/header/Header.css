@@ -1,6 +1,3 @@
-body {
-    background-color: #fff;
-}
 nav {
     width: 100%;
     height: 54px;
@@ -61,13 +58,13 @@ nav {
 }
 
 .logo {
-height: 30px;
+    height: 30px;
 }
 .nav-menu {
     position: relative;
 }
 
-.nav-menu-contaner {
+.nav-menu-container {
     position: absolute;
     top: 15px;
     left: -175px;
@@ -77,12 +74,12 @@ height: 30px;
     background-color: white;
     
 }
-.nav-menu-contaner-show {
+.nav-menu-container-show {
     display: block;
     width: 225px;
     z-index: 1000;
 }
-.nav-menu-contaner-hide {
+.nav-menu-container-hide {
     display: none;
     width: 225px;
     z-index: 1000;
@@ -106,7 +103,7 @@ height: 30px;
 }
 
 
-.nav-menu-contaner-tail {
+.nav-menu-container-tail {
     position: absolute;
     top: -7px;
     left: 178px;

@@ -216,6 +216,7 @@ textarea {
     align-items: center;
     
     border-radius: 10px 10px 0 0;
+    border: 0;
     border-bottom: 1px solid #dbdbdb;
 }
   
@@ -238,9 +239,15 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    background-color: white;
+    border: 0;
     border-bottom: 1px solid #dbdbdb;
+    box-shadow:0;
     font-weight: 700;
+}
+
+.profile-modal-button:hover {
+    background-color: #f2f1f1;
 }
 
 .profile-modal-button-blue {
@@ -251,6 +258,11 @@ textarea {
     color: #ed4956;
 }
 
+.profile-modal-button-red:disabled {
+    color: #e97e87;
+    background-color: #e4e4e4;
+}
+
 .profile-modal-bottom-button{
     width: 100%;
     height: 100%;
@@ -258,6 +270,25 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    
+    background-color: white;
+    border: 0;
+    box-shadow:0;
+    border-radius: 0 10px 10px 10px;
     font-weight: 500;
+}
+
+.profile-modal-bottom-button:hover {
+    background-color: #f2f1f1;
+}
+
+.profile-form-error {
+    height: 100px;
+    width: 427px;
+    
+    padding: 0 7.5px;
+    
+    line-height: 20px;
+    font-size: 16px;
+    color: red;
+    font-family: BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }

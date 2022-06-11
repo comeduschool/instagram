@@ -22,6 +22,15 @@ user_detail = UserViewSet.as_view({
     'patch': 'partial_update'
 })
 
+change_password = UserViewSet.as_view({
+    'put': 'change_password'
+})
+
+user_profile = UserViewSet.as_view({
+    'put': 'upload_profile',
+    'patch': 'upload_profile',
+    'delete': 'destroy_profile'
+})
 
 urlpatterns = [
     # path("pk"),
@@ -31,4 +40,6 @@ urlpatterns = [
     path('/authcode', authcode),
     path('/password', password),
     path('/<int:pk>', user_detail),
+    path('/<int:pk>/profile', user_profile),
+    path('/<int:pk>/password', change_password),
 ]
