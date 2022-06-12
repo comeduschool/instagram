@@ -25,7 +25,7 @@ export const FeedService = {
         async (_: void, {rejectWithValue})=>{
             try {
                 const resp = await axios.get('/feeds');
-                return {totalCount: resp.data.count, items: resp.data.results};
+                return {totalCount: resp.data.count, items: [...resp.data.results]};
             } catch (error: any) {
                 return rejectWithValue(error.response.message);
             }

@@ -42,10 +42,6 @@ const FeedForm = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    console.log(files);
-  }, [files]);
-
   const onDrop = (acceptedFiles: any) => {
     setFiles(acceptedFiles.map((file: File, index: number)=>{return {key: index, file: URL.createObjectURL(file), fileBlob: file}}));
   }
@@ -75,7 +71,6 @@ const FeedForm = () => {
           nav('/');
         })
         .catch((error: any)=>{
-          console.log(error);
           setErrorMsg(error);
         });
     }

@@ -41,10 +41,10 @@ export const FeedSlice = createSlice({
                 items: []
             }
         },
-        [FeedService.list.rejected.type]: (state, { payload }: PayloadAction<any>) => {
+        [FeedService.list.fulfilled.type]: (state, { payload }: PayloadAction<any>) => {
             state.loading = false;
             state.error = null;
-            state.totalCount = payload.count;
+            state.totalCount = payload.totalCount;
             state.feeds.items = [...state.feeds.items, ...payload.items];
         },
         [FeedService.list.rejected.type]: (state, { payload }: PayloadAction<any>) => {
