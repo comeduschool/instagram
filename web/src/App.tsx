@@ -1,5 +1,10 @@
 // React modules
+import { useEffect } from 'react';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+// services
+import { UserService } from './services/UserService';
 
 // Pages
 import NotFound from './pages/NotFound';
@@ -16,6 +21,15 @@ import Header from './components/header/Header';
 import FeedForm from "./components/feed-form/FeedForm";
 
 function App() {
+  const dispatch = useDispatch();
+  
+  useEffect(()=>{
+    let userId = localStorage.getItem('userId');
+    if (userId) {
+      dispatch<any>(UserService.retrieve(userId));
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Header />

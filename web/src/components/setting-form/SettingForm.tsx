@@ -39,7 +39,7 @@ const SettingForm = () => {
     setModal(" modal-show");
   }
 
-  const modalHide = (event: any) => {
+  const hideModal = (event: any) => {
     if (event.target.id === "modal") {
       setModal(" modal-hide");
     }
@@ -221,7 +221,7 @@ const SettingForm = () => {
         </div>
       </div>
 
-      <div id="modal" className={"profile-modal-container" + modal} onClick={modalHide}>
+      <div id="modal" className={"profile-modal-container" + modal} onClick={hideModal}>
         <div className="profile-modal">
           <div className="profile-modal-title-container">
             <div className="profile-modal-title">
