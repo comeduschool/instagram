@@ -13,6 +13,7 @@ import Lab from './pages/Lab';
 
 // Components
 import Header from './components/header/Header';
+import FeedForm from "./components/feed-form/FeedForm";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/lab" element={<Lab/>}></Route>
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>
+      <FeedForm />
     </BrowserRouter>
   );
 }
