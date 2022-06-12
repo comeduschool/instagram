@@ -59,6 +59,28 @@ const FeedForm = () => {
     }
   }
 
+  const postFeed = () => {
+    const description = getValues('description');
+    if (description === "") {
+      setErrorMsg("내용을 입력해 주세요.")
+    } else {
+      const formData = new FormData();
+      formData.append('description', description);
+      files.forEach((fileObj: {fileBlob: Blob}) => formData.append('images', fileObj.fileBlob));
+      dispatch<any>(FeedService.create(formData))
+        .unwrap()
+        .then(() => {
+          dispatch(HideModal());
+          setFiles([]);
+          nav('/');
+        })
+        .catch((error: any)=>{
+          console.log(error);
+          setErrorMsg(error);
+        });
+    }
+  }
+
   return (
     <div 
       id="feed-form-modal" 
@@ -104,7 +126,7 @@ const FeedForm = () => {
             <div className="feed-form-modal-title">
               <div className="feed-form-modal-title-side" onClick={()=>setFiles([])}>이전</div>
               <div>새 게시물</div>
-              <div className="feed-form-modal-title-side" onClick={()=>{}}>다음</div>
+              <div className="feed-form-modal-title-side" onClick={()=>{postFeed()}}>다음</div>
             </div>
           </div>
           <div className="feed-form-modal-content-container">
@@ -132,7 +154,7 @@ const FeedForm = () => {
                   <div className="feed-form-description-username">comedu</div>
                 </div>
                 <div className="feed-form-description-input-container">
-                  <textarea className="feed-form-description-input" {...register("content", {})} placeholder="문구 입력..."></textarea>
+                  <textarea className="feed-form-description-input" {...register("description", {})} placeholder="문구 입력..."></textarea>
                 </div>
                 {errorMsg !=="" && <div className="feed-form-description-error">{errorMsg}</div>}
               </div>

@@ -52,7 +52,7 @@ class FeedSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         today = date.today()
 
-        image_files = self.content['request'].FILES.getlist('images', None)
+        image_files = self.context['request'].FILES.getlist('images', None)
 
         if image_files is None:
             raise ValidationError("이미지 파일이 없습니다.")
@@ -75,7 +75,7 @@ class FeedSerializer(serializers.ModelSerializer):
                     settings.MEDIA_ROOT, 
                     f"feeds/{date_str}/{filename}"
                 )
-                if os.path.isfile(filepath):
+                if not os.path.exists(filepath):
                     break
 
             image = FeedImage(feed=feed)

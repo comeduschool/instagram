@@ -11,6 +11,11 @@ feed_list = FeedViewSet.as_view({
     'post': 'create'
 })
 
+feed_detail = FeedViewSet.as_view({
+    'delete': 'destroy'
+})
+
 urlpatterns = [
     path('', feed_list),
+    path('/<int:pk>', feed_detail),
 ]

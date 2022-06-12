@@ -10,7 +10,7 @@ import { Feed } from '../models/feed';
 export const FeedService = {
     create: createAsyncThunk(
         'feed/create',
-        async (feed: Feed, {rejectWithValue})=>{
+        async (feed: FormData, {rejectWithValue})=>{
             try {
                 const resp = await axios.post('/feeds', feed);
                 return resp.data;
