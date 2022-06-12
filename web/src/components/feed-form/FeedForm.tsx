@@ -46,7 +46,7 @@ const FeedForm = () => {
     setFiles(acceptedFiles.map((file: File, index: number)=>{return {key: index, file: URL.createObjectURL(file), fileBlob: file}}));
   }
 
-  const { getRootProps, getInputProps, inputRef } = useDropzone({onDrop, accept: {'image/*': []}});
+  const { getRootProps, getInputProps, open } = useDropzone({onDrop, accept: {'image/*': []}, noClick:true});
 
   const hideModal = (event: any) => {
     if (event.target.id === "feed-form-modal") {
@@ -106,7 +106,7 @@ const FeedForm = () => {
                 <div className="image-input-text">사진을 여기다 끌어다 놓으세요.</div>
                 <button 
                   className="image-input-btn"
-                  onClick={()=>inputRef.current.click()}
+                  onClick={open}
                 >
                   컴퓨터에서 선택
                 </button>

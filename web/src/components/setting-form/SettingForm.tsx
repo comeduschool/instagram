@@ -1,7 +1,10 @@
 // react modules
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, RegisterOptions } from 'react-hook-form';
 import { useDispatch, useSelector } from "react-redux";
+
+// external modules
+import { useDropzone } from 'react-dropzone';
 
 // Services
 import { UserService } from '../../services/UserService';
@@ -24,11 +27,9 @@ const SettingForm = () => {
   const [modal, setModal] = useState(" modal-hide");
   const [errorMsg, setErrorMsg] = useState("");
   const { register, setValue, getValues, formState: { errors } } = useForm({ mode: 'onChange' });
-  const fileInput: any = useRef(null);
-
   const user = useSelector((state: { UserState: UserState })=> state.UserState.user);
   const dispatch = useDispatch();
-
+  
   useEffect(()=>{
     const userId = localStorage.getItem("userId");
     dispatch<any>(UserService.retrieve(userId));
@@ -83,9 +84,31 @@ const SettingForm = () => {
       }
     }
   }
+  
+  const onDrop = (files: any) => {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    axios.patch(`users/${user.pk}/profile`, formData)
+      .then((resp)=>{
+        dispatch<any>(UpdateUser(resp.data));
+        setErrorMsg("");
+        setModal(" modal-hide");
+      })
+      .catch((error)=>{
+        setErrorMsg(error.response.data.message);
+        setModal(" modal-hide");
+      });
+  }
+
+  const { open } = useDropzone({
+    onDrop,
+    accept: {'image/*': []}, 
+    multiple: false, 
+    noClick:true
+  });
 
   const openFileSelector = () => {
-    fileInput.current.click()
+    open();
   }
 
   const uploadFile = (event: any) => {
@@ -105,6 +128,7 @@ const SettingForm = () => {
         })
     }
   }
+  
 
   const deleteFile = () => {
     axios.delete(`users/${user.pk}/profile`)
@@ -193,17 +217,6 @@ const SettingForm = () => {
           </div>
           <div className="profile-input-data">
             {errorMsg !=="" && <div className="profile-form-error">{errorMsg}</div>}
-          </div>
-        </div>
-        <div className="profile-input-container">
-          <div className="profile-input-label">
-          </div>
-          <div className="profile-input-data">
-            <input hidden type="file" 
-              ref={fileInput} 
-              onChange={uploadFile} 
-              accept="image/*"
-            />
           </div>
         </div>
       </div>
