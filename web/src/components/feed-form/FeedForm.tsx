@@ -1,5 +1,5 @@
 // react modules
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import { HideModal } from '../../reducers/FeedReducer';
 
 // models
 import { FeedState } from '../../models/feed';
+import { UserState } from '../../models/user';
 
 // services
 import { FeedService } from '../../services/FeedService';
@@ -37,7 +38,8 @@ const FeedForm = () => {
   const [fileInputStyle, setFileInputStyle] = useState<string>("image-input image-input-default");
   const [files, setFiles] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  const modal = useSelector((state: { FeedState: FeedState})=>state.FeedState.modal);
+  const modal = useSelector((state: { FeedState: FeedState})=>state.FeedState.createFeedModal);
+  const user = useSelector((state: { UserState: UserState})=>state.UserState.user);
   const { register, getValues } = useForm();
   const nav = useNavigate();
   const dispatch = useDispatch();
@@ -121,7 +123,7 @@ const FeedForm = () => {
             <div className="feed-form-modal-title">
               <div className="feed-form-modal-title-side" onClick={()=>setFiles([])}>이전</div>
               <div>새 게시물</div>
-              <div className="feed-form-modal-title-side" onClick={()=>{postFeed()}}>다음</div>
+              <div className="feed-form-modal-title-side" onClick={postFeed}>다음</div>
             </div>
           </div>
           <div className="feed-form-modal-content-container">
@@ -142,11 +144,11 @@ const FeedForm = () => {
                   <div className="feed-form-description-profile">
                     <img 
                       className="feed-form-description-profile-image" 
-                      src="assets/test-profile.jpeg"
+                      src={user.profile ? user.profile : 'profile.png'}
                       alt="profile"
                     />
                   </div>
-                  <div className="feed-form-description-username">comedu</div>
+                  <div className="feed-form-description-username">{user.username}</div>
                 </div>
                 <div className="feed-form-description-input-container">
                   <textarea className="feed-form-description-input" {...register("description", {})} placeholder="문구 입력..."></textarea>

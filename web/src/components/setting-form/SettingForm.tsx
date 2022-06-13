@@ -24,7 +24,7 @@ const SettingForm = () => {
     minLength: 6
   };
 
-  const [modal, setModal] = useState(" modal-hide");
+  const [modal, setModal] = useState(" profile-modal-hide");
   const [errorMsg, setErrorMsg] = useState("");
   const { register, setValue, getValues, formState: { errors } } = useForm({ mode: 'onChange' });
   const user = useSelector((state: { UserState: UserState })=> state.UserState.user);
@@ -36,12 +36,12 @@ const SettingForm = () => {
   }, []);
 
   const showModal = () => {
-    setModal(" modal-show");
+    setModal(" profile-modal-show");
   }
 
   const hideModal = (event: any) => {
     if (event.target.id === "modal") {
-      setModal(" modal-hide");
+      setModal(" profile-modal-hide");
     }
   }
 
@@ -92,11 +92,11 @@ const SettingForm = () => {
       .then((resp)=>{
         dispatch<any>(UpdateUser(resp.data));
         setErrorMsg("");
-        setModal(" modal-hide");
+        setModal(" profile-modal-hide");
       })
       .catch((error)=>{
         setErrorMsg(error.response.data.message);
-        setModal(" modal-hide");
+        setModal(" profile-modal-hide");
       });
   }
 
@@ -120,11 +120,11 @@ const SettingForm = () => {
         .then((resp)=>{
           dispatch<any>(UpdateUser(resp.data));
           setErrorMsg("");
-          setModal(" modal-hide");
+          setModal(" profile-modal-hide");
         })
         .catch((error)=>{
           setErrorMsg(error.response.data.message);
-          setModal(" modal-hide");
+          setModal(" profile-modal-hide");
         })
     }
   }

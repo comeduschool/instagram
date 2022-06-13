@@ -150,23 +150,166 @@
 }
 
 .slick-list {
-    z-index: 100;
+    z-index: 10;
 }
 
 .slick-prev {
     position: absolute;
     top: 50%;
     left: 5%;
-    z-index: 100;
+    z-index: 10;
 }
 
 .slick-next {
     position: absolute;
     top: 50%;
     right: 5%;
-    z-index: 100;
+    z-index: 10;
 }
 
 .slick-dots {
     bottom: 5px;
+    z-index: 10;
+}
+
+
+.feed-modal-container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    z-index: 51;
+}
+
+.feed-modal-show {
+    width: 100vw;
+    height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.feed-modal-hide {
+    width: 0;
+    height: 0;
+    
+    display: none;
+}
+
+.feed-modal {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    
+    display: flex;
+    flex-direction: column;
+    
+    background: white;
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+  /* 
+  .modal2 {
+    width: 800px;
+    height: 600px;
+    position: relative;
+  
+    background: white;
+    backdrop-filter: blur(13.5px);
+    -webkit-backdrop-filter: blur(13.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+   */
+.feed-modal-title-container {
+    width: 100%;
+    height: 120px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border-radius: 10px 10px 0 0;
+    border: 0;
+    border-bottom: 1px solid #dbdbdb;
+}
+  
+.feed-modal-content-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 0 0 10px 10px;
+}
+
+.feed-modal-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.feed-modal-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 0;
+    border-bottom: 1px solid #dbdbdb;
+    box-shadow:0;
+    font-weight: 700;
+}
+
+.feed-modal-button:hover {
+    background-color: #f2f1f1;
+}
+
+.feed-modal-button-blue {
+    color: #0095f6;
+}
+
+.feed-modal-button-red {
+    color: #ed4956;
+}
+
+.feed-modal-button-red:disabled {
+    color: #e97e87;
+    background-color: #e4e4e4;
+}
+
+.feed-modal-bottom-button{
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 0;
+    box-shadow:0;
+    border-radius: 0 10px 10px 10px;
+    font-weight: 500;
+}
+
+.feed-modal-bottom-button:hover {
+    background-color: #f2f1f1;
+}
+
+.feed-form-error {
+    height: 100px;
+    width: 427px;
+    
+    padding: 0 7.5px;
+    
+    line-height: 20px;
+    font-size: 16px;
+    color: red;
+    font-family: BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }

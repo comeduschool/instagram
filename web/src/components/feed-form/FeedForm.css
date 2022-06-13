@@ -11,7 +11,7 @@
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
 
-    z-index: 1500;
+    z-index: 50;
 }
   
 .feed-form-modal-show {
@@ -109,7 +109,7 @@
 }
   
 .image-input {
-    z-index: 1500;
+    z-index: 50;
     width: 100%;
     height: 100%;
     display: flex;
@@ -241,19 +241,19 @@
     position: absolute;
     top: 50%;
     left: 5%;
-    z-index: 1501;
+    z-index: 51;
 }
 
 .slick-next {
     position: absolute;
     top: 50%;
     right: 5%;
-    z-index: 1501;
+    z-index: 51;
 }
 
 .slick-dots {
     bottom: 5px;
-    z-index: 1501;
+    z-index: 51;
 }
 
 .feed-form-description-error {
