@@ -32,7 +32,7 @@ const FeedList = () => {
   return (
     <div className="feeds">
       {
-        items.map(feed=><FeedItem feed={feed}></FeedItem>)
+        items.map(feed=><FeedItem key={feed.pk} feed={feed}></FeedItem>)
       }
     </div>
   );
