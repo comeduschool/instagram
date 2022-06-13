@@ -18,12 +18,6 @@ export const FeedSlice = createSlice({
         HideCreateFeedFormModal: (state: FeedState) => {
             state.createFeedFormModal = false;
         },
-        ShowUpdateFeedFormModal: (state: FeedState) => {
-            state.createFeedFormModal = true;
-        },
-        HideUpdateFeedFormModal: (state: FeedState) => {
-            state.createFeedFormModal = false;
-        }
     },
     extraReducers: {
         [FeedService.list.rejected.type]: (state) => {
@@ -80,7 +74,5 @@ export const FeedSlice = createSlice({
 export const { 
     ShowCreateFeedFormModal,
     HideCreateFeedFormModal,
-    ShowUpdateFeedFormModal,
-    HideUpdateFeedFormModal
 } = FeedSlice.actions;
 export default FeedSlice.reducer;

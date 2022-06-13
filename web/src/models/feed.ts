@@ -21,7 +21,6 @@ export interface FeedList {
 
 export interface FeedState {
     createFeedFormModal: boolean;
-    updateFeedFormModal: boolean;
     error: any;
     loading: boolean;
     totalCount: number;
@@ -30,7 +29,6 @@ export interface FeedState {
 
 export const InitFeedState: FeedState = {
     createFeedFormModal: false,
-    updateFeedFormModal: false,
     error: null,
     loading: false,
     totalCount: 0,
