@@ -1,15 +1,15 @@
 // React modules
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // actions
-import { ShowModal } from '../../reducers/FeedReducer';
+import { ShowCreateFeedFormModal } from '../../reducers/FeedReducer';
 
 // models
 import { FeedState } from '../../models/feed';
-import { UserState } from '../../models/feed';
+import { UserState } from '../../models/user';
 
 // Styles
 import './Header.css';
@@ -17,10 +17,15 @@ import './Header.css';
 const Header = () => {
   const [menu, setMenu] = useState(false);
   const [cookies] = useCookies();
-  const modal = useSelector((state: { FeedState: FeedState}) => state.FeedState.modal);
+  const modal = useSelector((state: { FeedState: FeedState}) => state.FeedState.createFeedFormModal);
   const user = useSelector((state: { UserState: UserState}) => state.UserState.user);
-  const dispatch = useDispatch();
+  const location = useLocation();
   const nav = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    console.log(location.pathname);
+  })
 
   const showMenu = () => {
     console.log("showMenu");
@@ -47,7 +52,7 @@ const Header = () => {
   const showFeedForm = () => {
     console.log("showFeedForm");
     if (modal === false) {
-      dispatch(ShowModal());
+      dispatch(ShowCreateFeedFormModal());
     }
   };
 
@@ -63,7 +68,7 @@ const Header = () => {
         <div className="nav-right">
           <span className="nav-item">
             <Link to="/">
-              <img src="assets/icons/home-outlined.svg" alt="home.svg" />
+              <img src={location.pathname === "/" ? "assets/icons/home-filled.svg" : "assets/icons/home-outlined.svg"} alt="home.svg" />
             </Link>
           </span>
           <span className="nav-item" onClick={showFeedForm}>

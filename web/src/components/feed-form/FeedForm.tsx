@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDropzone } from 'react-dropzone';
 
 // actions
-import { HideModal } from '../../reducers/FeedReducer';
+import { HideCreateFeedFormModal } from '../../reducers/FeedReducer';
 
 // models
 import { FeedState } from '../../models/feed';
@@ -38,7 +38,7 @@ const FeedForm = () => {
   const [fileInputStyle, setFileInputStyle] = useState<string>("image-input image-input-default");
   const [files, setFiles] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  const modal = useSelector((state: { FeedState: FeedState})=>state.FeedState.createFeedModal);
+  const modal = useSelector((state: { FeedState: FeedState})=>state.FeedState.createFeedFormModal);
   const user = useSelector((state: { UserState: UserState})=>state.UserState.user);
   const { register, getValues } = useForm();
   const nav = useNavigate();
@@ -52,7 +52,7 @@ const FeedForm = () => {
 
   const hideModal = (event: any) => {
     if (event.target.id === "feed-form-modal") {
-      dispatch(HideModal());
+      dispatch(HideCreateFeedFormModal());
       setFiles([]);
     }
   }
@@ -68,7 +68,7 @@ const FeedForm = () => {
       dispatch<any>(FeedService.create(formData))
         .unwrap()
         .then(() => {
-          dispatch(HideModal());
+          dispatch(HideCreateFeedFormModal());
           setFiles([]);
           nav('/');
         })

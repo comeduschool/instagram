@@ -5,13 +5,13 @@ export interface FeedUser {
 }
 
 export interface Feed {
-    pk: number;
-    user: FeedUser;
-    images: string[];
-    description: string;
-    like: number;
-    created: string;
-    updated: string;
+    pk?: number;
+    user?: FeedUser;
+    images?: string[];
+    description?: string;
+    like?: number;
+    created?: string;
+    updated?: string;
 }
 
 export interface FeedList {
@@ -20,7 +20,8 @@ export interface FeedList {
 }
 
 export interface FeedState {
-    modal: boolean;
+    createFeedFormModal: boolean;
+    updateFeedFormModal: boolean;
     error: any;
     loading: boolean;
     totalCount: number;
@@ -28,7 +29,8 @@ export interface FeedState {
 }
 
 export const InitFeedState: FeedState = {
-    modal: false,
+    createFeedFormModal: false,
+    updateFeedFormModal: false,
     error: null,
     loading: false,
     totalCount: 0,

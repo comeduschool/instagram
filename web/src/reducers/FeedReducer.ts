@@ -12,26 +12,20 @@ export const FeedSlice = createSlice({
     name: 'feed',
     initialState: InitFeedState,
     reducers: {
-        ShowModal: (state: FeedState) => {
-            state.modal = true;
+        ShowCreateFeedFormModal: (state: FeedState) => {
+            state.createFeedFormModal = true;
         },
-        HideModal: (state: FeedState) => {
-            state.modal = false;
+        HideCreateFeedFormModal: (state: FeedState) => {
+            state.createFeedFormModal = false;
+        },
+        ShowUpdateFeedFormModal: (state: FeedState) => {
+            state.createFeedFormModal = true;
+        },
+        HideUpdateFeedFormModal: (state: FeedState) => {
+            state.createFeedFormModal = false;
         }
     },
     extraReducers: {
-        [FeedService.create.pending.type]: (state) => {
-            state.loading = true;
-            state.error = null;
-        },
-        [FeedService.create.fulfilled.type]: (state, { payload }: PayloadAction<Feed>) => {
-            state.loading = false;
-            state.error = null;
-        },
-        [FeedService.create.rejected.type]: (state, { payload }: PayloadAction<any>) => {
-            state.loading = false;
-            state.error = payload
-        },
         [FeedService.list.rejected.type]: (state) => {
             state.loading = true;
             state.error = null;
@@ -50,12 +44,43 @@ export const FeedSlice = createSlice({
         [FeedService.list.rejected.type]: (state, { payload }: PayloadAction<any>) => {
             state.loading = false;
             state.error = payload;
+        },
+        [FeedService.create.pending.type]: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        [FeedService.create.fulfilled.type]: (state, { payload }: PayloadAction<Feed>) => {
+            state.loading = false;
+            state.error = null;
+        },
+        [FeedService.create.rejected.type]: (state, { payload }: PayloadAction<any>) => {
+            state.loading = false;
+            state.error = payload
+        },
+        [FeedService.update.rejected.type]: (state) => {
+            state.loading = true;
+            state.error = null;
+            state.totalCount = 0;
+            state.feeds = {
+                page:1, 
+                items: []
+            }
+        },
+        [FeedService.update.fulfilled.type]: (state, { payload }: PayloadAction<any>) => {
+            state.loading = false;
+            state.error = null;
+        },
+        [FeedService.update.rejected.type]: (state, { payload }: PayloadAction<any>) => {
+            state.loading = false;
+            state.error = payload;
         }
     }
 });
 
 export const { 
-    ShowModal,
-    HideModal
+    ShowCreateFeedFormModal,
+    HideCreateFeedFormModal,
+    ShowUpdateFeedFormModal,
+    HideUpdateFeedFormModal
 } = FeedSlice.actions;
 export default FeedSlice.reducer;
