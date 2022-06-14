@@ -1,6 +1,5 @@
 // react modules
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -34,14 +33,12 @@ const FeedForm = () => {
     slidesToScroll: 1,
     // className: 'slider',
   };
-
   const [fileInputStyle, setFileInputStyle] = useState<string>("image-input image-input-default");
   const [files, setFiles] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
   const modal = useSelector((state: { FeedState: FeedState})=>state.FeedState.createFeedFormModal);
   const user = useSelector((state: { UserState: UserState})=>state.UserState.user);
   const { register, getValues } = useForm();
-  const nav = useNavigate();
   const dispatch = useDispatch();
 
   const onDrop = (acceptedFiles: any) => {

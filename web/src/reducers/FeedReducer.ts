@@ -39,6 +39,22 @@ export const FeedSlice = createSlice({
             state.loading = false;
             state.error = payload;
         },
+        [FeedService.nextPage.pending.type]: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        [FeedService.nextPage.fulfilled.type]: (state, { payload }: PayloadAction<Feed[]>) => {
+            state.loading = false;
+            state.error = null;
+            state.feeds = {
+                page: state.feeds.page+1,
+                items: [...state.feeds.items, ...payload]
+            };
+        },
+        [FeedService.nextPage.rejected.type]: (state, { payload }: PayloadAction<any>) => {
+            state.loading = false;
+            state.error = payload
+        },
         [FeedService.create.pending.type]: (state) => {
             state.loading = true;
             state.error = null;

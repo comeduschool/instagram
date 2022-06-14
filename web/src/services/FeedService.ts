@@ -19,6 +19,20 @@ export const FeedService = {
             }
         }
     ),
+    nextPage: createAsyncThunk(
+        'feed/nextPage',
+        async (_: void, {rejectWithValue, getState})=>{
+            const state: any = getState();
+            const nextPage = state.FeedState.feeds.page;
+                
+            try {
+                const resp = await axios.get(`/feeds?page=${nextPage}`)    ;
+                return resp.data.results;
+            } catch (error: any) {
+                return rejectWithValue(error.response.message);
+            }
+        }
+    ),
     create: createAsyncThunk(
         'feed/create',
         async (feed: FormData, {rejectWithValue})=>{
