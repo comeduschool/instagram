@@ -79,7 +79,7 @@ const FeedItem = ({ feed }: any) => {
     axios.delete(`/feeds/${feed.pk}`)
       .then(()=>{
         setMenuModalStyle(" feed-menu-modal-hide");
-        nav("/")
+        window.location.replace("/")
       });
   }
 
@@ -94,7 +94,7 @@ const FeedItem = ({ feed }: any) => {
         .then(()=>{
           dispatch<any>(FeedService.list());
           setFormModalStyle(" feed-form-modal-hide");
-          nav('/');
+          window.location.replace("/")
         })
         .catch((error: any)=>{
           setErrorMsg(error);
