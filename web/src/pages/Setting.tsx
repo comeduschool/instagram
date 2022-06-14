@@ -15,9 +15,9 @@ const Setting = () => {
       nav('/signin', {replace: true});
     }
   }, []);
-  
+
   return (
-    <div className="center">
+    <div className="horizontal-center">
       <SettingForm />
     </div>
     );

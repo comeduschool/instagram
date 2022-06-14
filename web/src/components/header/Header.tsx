@@ -84,7 +84,7 @@ const Header = () => {
               <div className={menu ? "nav-menu-container nav-menu-container-show" : "nav-menu-container nav-menu-container-hide"}>
                 <div className="nav-menu-container-tail"></div>
                 <div className="nav-menu-item-list">
-                  <a className="icon-label-container" href="/:">
+                  <a className="icon-label-container" href={"/"+user.username}>
                     <img src="assets/icons/profile.svg" alt="profile.svg" />
                     <span className="icon-label">프로필</span>
                   </a>

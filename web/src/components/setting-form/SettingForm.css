@@ -7,7 +7,7 @@
     flex-direction: column;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
     border-radius: 3px;
-    margin-top: 30px;
+    margin-top: 120px;
     background-color: white;
 }
   
@@ -162,6 +162,7 @@ textarea {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
+    z-index: 10;
 }
 
 .profile-modal-show {
