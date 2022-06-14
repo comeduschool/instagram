@@ -23,7 +23,6 @@ const FeedList = () => {
   useEffect(()=>{
     if(init === true) {
       dispatch<any>(FeedService.list());
-      console.log(items);
       setInit(false);
     }
     setInit(true);

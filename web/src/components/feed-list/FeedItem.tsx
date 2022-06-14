@@ -38,7 +38,6 @@ const FeedItem = ({ feed }: any) => {
   const dispatch = useDispatch();
   
   useEffect(()=>{
-    console.log(feed);
     let currentUserId = localStorage.getItem("userId");
     if (currentUserId !== null) {
       setUserId(+currentUserId);
@@ -85,7 +84,22 @@ const FeedItem = ({ feed }: any) => {
   }
 
   const updateFeed = () => {
-
+    const description = getValues('description');
+    if (description === "") {
+      setErrorMsg("내용을 입력해 주세요.")
+    } else {
+      const data = {pk: feed.pk, description};
+      dispatch<any>(FeedService.update(data))
+        .unwrap()
+        .then(()=>{
+          dispatch<any>(FeedService.list());
+          setFormModalStyle(" feed-form-modal-hide");
+          nav('/');
+        })
+        .catch((error: any)=>{
+          setErrorMsg(error);
+        });
+    }
   }
 
   return (
@@ -198,7 +212,7 @@ const FeedItem = ({ feed }: any) => {
                     <div className="feed-form-description-username">{feed.user.username}</div>
                   </div>
                   <div className="feed-form-description-input-container">
-                    <textarea className="feed-form-description-input" {...register("description", {})} placeholder="문구 입력..."></textarea>
+                    <textarea className="feed-form-description-input" {...register("description", {})} placeholder="문구 입력..." defaultValue={feed.description}></textarea>
                   </div>
                   {errorMsg !=="" && <div className="feed-form-description-error">{errorMsg}</div>}
                 </div>

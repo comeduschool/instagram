@@ -23,10 +23,6 @@ const Header = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    console.log(location.pathname);
-  })
-
   const showMenu = () => {
     console.log("showMenu");
     setMenu(true);
@@ -39,9 +35,12 @@ const Header = () => {
   }
 
   const handleAuth = () => {
+    console.log("hello");
     if (!cookies.csrftoken) {
+      console.log("1");
       nav('/signin', {replace: true});
     } else {
+      console.log("2");
       document.cookie = 'csrftoken=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       localStorage.clear();
       window.location.replace('/');

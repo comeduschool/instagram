@@ -12,6 +12,7 @@ feed_list = FeedViewSet.as_view({
 })
 
 feed_detail = FeedViewSet.as_view({
+    'put': 'partial_update',
     'delete': 'destroy'
 })
 

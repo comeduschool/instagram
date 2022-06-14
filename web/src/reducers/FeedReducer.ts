@@ -33,7 +33,7 @@ export const FeedSlice = createSlice({
             state.loading = false;
             state.error = null;
             state.totalCount = payload.totalCount;
-            state.feeds.items = [...state.feeds.items, ...payload.items];
+            state.feeds.items = [...payload.items];
         },
         [FeedService.list.rejected.type]: (state, { payload }: PayloadAction<any>) => {
             state.loading = false;

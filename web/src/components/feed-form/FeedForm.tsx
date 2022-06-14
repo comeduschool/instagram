@@ -70,7 +70,7 @@ const FeedForm = () => {
         .then(() => {
           dispatch(HideCreateFeedFormModal());
           setFiles([]);
-          nav('/');
+          window.location.replace('/');
         })
         .catch((error: any)=>{
           setErrorMsg(error);
